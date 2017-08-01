@@ -5,10 +5,10 @@ const Router = require('koa-router');
 
 const app = new Koa();
 const router = new Router();
-
+console.log(__dirname);
 app.use(koaStatic(__dirname + '/public'));
 
-app.use(koaViews(__dirname + '/views', {
+app.use(koaViews(__dirname + '../views', {
     map: {
         html: 'pug',
         pug: 'pug'
