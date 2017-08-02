@@ -1,3 +1,4 @@
+const path = require('path');
 const Koa = require('koa');
 const koaStatic = require('koa-static');
 const koaViews = require('koa-views');
@@ -5,10 +6,10 @@ const Router = require('koa-router');
 
 const app = new Koa();
 const router = new Router();
-console.log(__dirname);
-app.use(koaStatic(__dirname + '/public'));
 
-app.use(koaViews(__dirname + '../views', {
+app.use(koaStatic(path.join(__dirname, '../public')));
+
+app.use(koaViews(path.join(__dirname, '../views'), {
     map: {
         html: 'pug',
         pug: 'pug'

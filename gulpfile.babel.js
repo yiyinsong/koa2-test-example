@@ -34,7 +34,7 @@ gulp.task('server', ['scripts'], function() {
         }); 
     }); 
 
-    gulp.watch('src/sass/**/*.scss' , ['styles']); //监测变化 执行styles任务
-    gulp.watch('src/scripts/**/*.js' , ['scripts']);
+    //gulp.watch('src/sass/**/*.scss' , ['styles']); //监测变化 执行styles任务
+    gulp.watch('src/**/*.js' , ['scripts']);
 });
 gulp.task('default', ['server']);  
