@@ -8,6 +8,15 @@ const browserSync = require('browser-sync').create();
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
+gulp.task('sass', ()=>{
+    return gulp.src('src/sass/**/*.scss')
+        .pipe($.sass())
+        .pipe($.cssnano())
+//        .pipe($.rename({suffix: '.min'}))
+        .pipe($.concat('index.min.css'))
+        .pipe(gulp.dest('public/css'));
+});
+
 gulp.task('scripts' , ()=>{
     return gulp.src('src/**/*.js')
         .pipe($.plumber())
@@ -19,22 +28,22 @@ gulp.task('scripts' , ()=>{
         .pipe(gulp.dest('public'));     
 });
 
-gulp.task('server', ['scripts'], function() { 
+gulp.task('server', function() { 
     $.nodemon({ 
         script: 'public/app.min.js', // 忽略部分对程序运行无影响的文件的改动，nodemon只监视js文件，可用ext项来扩展别的文件类型 
-        ignore: ["gulpfile.js", "node_modules/", "package.json"], 
+        ignore: ["gulpfile.babel.js", "node_modules/", "package.json"], 
         env: { 'NODE_ENV': 'development' } 
     }).on('start', function() { 
         browserSync.init({ 
             proxy: 'http://localhost:3000', 
-            files: ["app.min.js", "public/**/*.*", "views/**"], 
+            files: ["public/**/*.*", "views/**"], 
             port:8080 
     }, function() { 
         console.log("browser refreshed."); 
         }); 
     }); 
 
-    //gulp.watch('src/sass/**/*.scss' , ['styles']); //监测变化 执行styles任务
     gulp.watch('src/**/*.js' , ['scripts']);
+    gulp.watch('src/sass/**/*.scss', ['sass']);
 });
 gulp.task('default', ['server']);  
