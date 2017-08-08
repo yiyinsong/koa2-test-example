@@ -1,14 +1,18 @@
+/**
 const path = require('path');
 const Koa = require('koa');
 const koaStatic = require('koa-static');
 const koaViews = require('koa-views');
-const Router = require('koa-router');
+**/
+import path from 'path';
+import Koa from 'koa';
+import koaStatic from 'koa-static';
+import koaViews from 'koa-views';
+
+import router from './routes/route';
 
 const app = new Koa();
-const router = new Router();
-
 app.use(koaStatic(path.join(__dirname, '../public')));
-
 app.use(koaViews(path.join(__dirname, '../views'), {
     map: {
         html: 'pug',
@@ -24,12 +28,7 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
 });
 
-
-router.get('/', async (ctx, next) => {
-    await ctx.render('./frontend/index');
-});
-
 app.use(router.routes())
-    .use(router.allowedMethods())
+   .use(router.allowedMethods());
 
 app.listen(3000);

@@ -23,14 +23,14 @@ gulp.task('scripts' , ()=>{
         .pipe($.sourcemaps.init())
         .pipe($.babel())
         .pipe($.uglify())
-        .pipe($.rename({suffix: '.min'}))
+      //.pipe($.rename({suffix: '.min'}))
         .pipe($.sourcemaps.write('.'))
         .pipe(gulp.dest('public'));     
 });
 
 gulp.task('server', function() { 
     $.nodemon({ 
-        script: 'public/app.min.js', // 忽略部分对程序运行无影响的文件的改动，nodemon只监视js文件，可用ext项来扩展别的文件类型 
+        script: 'public/app.js', // 忽略部分对程序运行无影响的文件的改动，nodemon只监视js文件，可用ext项来扩展别的文件类型 
         ignore: ["gulpfile.babel.js", "node_modules/", "package.json"], 
         env: { 'NODE_ENV': 'development' } 
     }).on('start', function() { 
