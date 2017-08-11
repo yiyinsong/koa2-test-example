@@ -21,13 +21,6 @@ app.use(koaViews(path.join(__dirname, '../views'), {
     extension: 'pug'
 }));
 
-app.use(async (ctx, next) => {
-  const start = new Date();
-  await next();
-  const ms = new Date() - start;
-  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
-});
-
 app.use(router.routes())
    .use(router.allowedMethods());
 

@@ -1,2 +1,1 @@
-document.write('hksjdkf');
-alert('d');
+document.write('hksjdkfdf96');
