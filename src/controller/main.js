@@ -1,4 +1,4 @@
-import fetch from 'whatwg-fetch';
+import fetch from 'isomorphic-fetch';
 
 const index = async (ctx, next) => {
     await ctx.render('./frontend/index');
