@@ -1,9 +1,3 @@
-/**
-const path = require('path');
-const Koa = require('koa');
-const koaStatic = require('koa-static');
-const koaViews = require('koa-views');
-**/
 import path from 'path';
 import Koa from 'koa';
 import koaStatic from 'koa-static';

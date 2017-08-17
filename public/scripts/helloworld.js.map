@@ -1,1 +1,1 @@
-{"version":3,"sources":["scripts/helloworld.js"],"names":["document","write"],"mappings":"aAAAA,SAASC,MAAM","file":"helloworld.js","sourcesContent":["document.write('hksjdkfdf96');"]}
+{"version":3,"sources":["scripts/helloworld.js"],"names":["document","getElementById","addEventListener","e","fetch","method"],"mappings":"aAAAA,SAASC,eAAe,WAAWC,iBAAiB,QAAS,SAACC,GAC1DC,MAAM,cAAeC,OAAQ","file":"helloworld.js","sourcesContent":["document.getElementById('getData').addEventListener('click', (e) => {\r\n    fetch('/goodslist', {method: 'POST'});\r\n});"]}

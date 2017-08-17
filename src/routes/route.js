@@ -1,9 +1,10 @@
-const Router = require('koa-router');
+import Router from 'koa-router';
+import MainController from '../controller/main';
 
 const router = new Router();
 
-router.get('/', async (ctx, next) => {
-    await ctx.render('./frontend/index');
-});
+router.get('/', MainController.index);
+
+router.post('/goodslist', MainController.goodsList);
 
 export default router;

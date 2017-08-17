@@ -35,7 +35,7 @@ gulp.task('server', function() {
         env: { 'NODE_ENV': 'development' } 
     }).on('start', function() { 
         browserSync.init({ 
-            proxy: 'http://localhost:3000', 
+            proxy: 'http://syy.jdhui.com:3000', 
             files: ["public/**/*.*", "views/**"], 
             port:8080 
     }, function() { 
