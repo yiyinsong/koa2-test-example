@@ -2,6 +2,7 @@ import path from 'path';
 import Koa from 'koa';
 import koaStatic from 'koa-static';
 import koaViews from 'koa-views';
+import monk from 'monk';
 
 import router from './routes/route';
 
@@ -14,6 +15,13 @@ app.use(koaViews(path.join(__dirname, '../views'), {
     },
     extension: 'pug'
 }));
+
+const db = monk('localhost/jdh');
+const user = db.get('user');
+user.find().then((r) => {
+    console.log(r);
+});
+db.close();
 
 app.use(router.routes())
    .use(router.allowedMethods());
