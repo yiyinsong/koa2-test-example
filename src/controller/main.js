@@ -9,7 +9,7 @@ const goodsList = async (ctx, next) => {
         method: 'GET'
     });
     r = await r.json();
-
+	ctx.body = r;
     console.log(r);
 }
 
