@@ -1,4 +1,4 @@
-#koa2 about music
+koa2 about music
 
 koa2 + gulp + nodemon
 
