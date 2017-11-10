@@ -1,8 +1,7 @@
-//引入gulp
-const gulp = require('gulp'); 
-//自动加载插件 省去一个一个require进来
-const gulpLoadPlugins = require('gulp-load-plugins'); 
-//浏览器同步
+//寮曞叆gulp
+const gulp = require('gulp');
+//鑷姩鍔犺浇鎻掍欢 鐪佸幓涓�涓竴涓猺equire杩涙潵
+const gulpLoadPlugins = require('gulp-load-plugins');
 const browserSync = require('browser-sync').create();
 
 const $ = gulpLoadPlugins();
@@ -30,14 +29,14 @@ gulp.task('scripts' , ()=>{
 
 gulp.task('server', function() { 
     $.nodemon({ 
-        script: 'public/app.js', // 忽略部分对程序运行无影响的文件的改动，nodemon只监视js文件，可用ext项来扩展别的文件类型 
+        script: 'public/app.js',
         ignore: ["gulpfile.babel.js", "node_modules/", "package.json"], 
         env: { 'NODE_ENV': 'development' } 
     }).on('start', function() { 
         browserSync.init({ 
-            proxy: 'http://syy.jdhui.com:3000', 
+            proxy: 'http://syy.jdhui.com:3000',
             files: ["public/**/*.*", "views/**"], 
-            port:8080 
+            port: 8080
     }, function() { 
         console.log("browser refreshed."); 
         }); 

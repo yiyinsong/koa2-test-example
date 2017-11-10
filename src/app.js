@@ -19,7 +19,7 @@ app.use(koaViews(path.join(__dirname, '../views'), {
 const db = monk('localhost/jdh');
 const user = db.get('user');
 user.find().then((r) => {
-    console.log(r);
+    console.log('----------' + r);
 });
 db.close();
 
