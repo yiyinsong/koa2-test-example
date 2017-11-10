@@ -4,10 +4,11 @@ import koaStatic from 'koa-static';
 import koaViews from 'koa-views';
 import monk from 'monk';
 
-import router from './routes/route';
+import router from './backend/routes/route';
 
 const app = new Koa();
 app.use(koaStatic(path.join(__dirname, '../public')));
+
 app.use(koaViews(path.join(__dirname, '../views'), {
     map: {
         html: 'pug',
@@ -15,13 +16,13 @@ app.use(koaViews(path.join(__dirname, '../views'), {
     },
     extension: 'pug'
 }));
-
-const db = monk('localhost/jdh');
-const user = db.get('user');
-user.find().then((r) => {
-    console.log('----------' + r);
-});
-db.close();
+ 
+//const db = monk('localhost/music');
+//const user = db.get('user');
+//user.find().then((r) => {
+//    console.log('----------' + r); 
+//});
+//db.close();
 
 app.use(router.routes())
    .use(router.allowedMethods());

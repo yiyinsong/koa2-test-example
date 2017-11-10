@@ -7,13 +7,21 @@ const browserSync = require('browser-sync').create();
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
-gulp.task('sass', ()=>{
-    return gulp.src('src/sass/**/*.scss')
+gulp.task('backendSass', ()=>{
+    return gulp.src('src/backend/sass/*.scss')
         .pipe($.sass())
         .pipe($.cssnano())
 //        .pipe($.rename({suffix: '.min'}))
         .pipe($.concat('index.min.css'))
-        .pipe(gulp.dest('public/css'));
+        .pipe(gulp.dest('public/backend/css'));
+});
+gulp.task('frontendSass', ()=>{
+    return gulp.src('src/frontend/sass/*.scss')
+        .pipe($.sass())
+        .pipe($.cssnano())
+//        .pipe($.rename({suffix: '.min'}))
+        .pipe($.concat('index.min.css'))
+        .pipe(gulp.dest('public/frontend/css'));
 });
 
 gulp.task('scripts' , ()=>{
@@ -22,27 +30,31 @@ gulp.task('scripts' , ()=>{
         .pipe($.sourcemaps.init())
         .pipe($.babel())
         .pipe($.uglify())
-      //.pipe($.rename({suffix: '.min'}))
-        .pipe($.sourcemaps.write('.'))
         .pipe(gulp.dest('public'));     
 });
 
 gulp.task('server', function() { 
     $.nodemon({ 
         script: 'public/app.js',
-        ignore: ["gulpfile.babel.js", "node_modules/", "package.json"], 
+        ignore: [
+			"public/**/*.*", 
+			"views/**/*.*", 
+			"gulpfile.babel.js", 
+			"node_modules/",
+		], 
         env: { 'NODE_ENV': 'development' } 
-    }).on('start', function() { 
+    }).on('start', function() {
         browserSync.init({ 
             proxy: 'http://syy.jdhui.com:3000',
-            files: ["public/**/*.*", "views/**"], 
+            files: ["public/**/*.*", "views/**"],
             port: 8080
-    }, function() { 
-        console.log("browser refreshed."); 
-        }); 
+		}, function() {
+			console.log("browser refreshed."); 
+		}); 
     }); 
 
     gulp.watch('src/**/*.js' , ['scripts']);
-    gulp.watch('src/sass/**/*.scss', ['sass']);
+    gulp.watch('src/backend/sass/*.scss', ['backendSass']);    
+	gulp.watch('src/frontend/sass/*.scss', ['frontendSass']);
 });
 gulp.task('default', ['server']);  

@@ -1,0 +1,21 @@
+{
+  "name": "musicByKoa2",
+  "description": "bower management tool",
+  "main": "public/app.js",
+  "authors": [
+    "yiyinsong <390396674@qq.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/yiyinsong/koa2-test-example",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "layui": "https://github.com/sentsin/layui.git#^2.1.7"
+  }
+}

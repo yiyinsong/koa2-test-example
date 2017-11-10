@@ -3,12 +3,14 @@
 	"ignore": [
 		".git",
 		".svn",
-		"node_modules/**/node_modules"
+		"node_modules/**/node_modules",
+		"public/",
+		"views/"
 	],
 	"verbose": true,
 	"execMap": {
 		"js": "node --harmony",
-        "jade": "node --harmony"
+        "pug": "node --harmony"
 	},
 	"watch": [
 		

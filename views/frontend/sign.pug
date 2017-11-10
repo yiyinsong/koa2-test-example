@@ -1,0 +1,21 @@
+extends ./includes/header.pug
+block content
+	form.layui-form(action="")
+		.layui-form-item
+			label.layui-form-label 用户头像
+			.layui-input-block
+				button.layui-btn(type="button" id="test2") 上传头像
+		.layui-form-item
+			label.layui-form-label 用户名称
+			.layui-input-block
+				input.layui-input(type="text", name='name', placeholder='请输入用户名')
+		.layui-form-item
+			label.layui-form-label 用户密码
+			.layui-input-block
+				input.layui-input(type="password", name='password', placeholder='请输入密码')
+		.layui-form-item
+			label.layui-form-label 确认密码
+			.layui-input-block
+				input.layui-input(type="password", name='repassword', placeholder='请输入确认密码')
+		.layui-form-item
+			button.layui-btn(type="submit") 提交
