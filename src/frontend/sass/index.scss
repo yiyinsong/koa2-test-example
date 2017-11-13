@@ -1,4 +1,28 @@
-.content{
-	width: 1200px;
-	margin: 0 auto; 
+.sign-container{
+	padding-top: 20px;
+	.layui-elem-field{
+		padding: 0 20px;
+	}
+	.sign-form{
+		margin-top: 20px;
+		.sign-upload{
+			width: 92px;
+			position: relative;
+			input[type=file]{
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 92px;
+				height: 38px;
+				opacity: 0;
+			}
+		}
+		.sign-head-icon{
+			width: 92px;
+			height: 92px;
+		}
+		.sign-btn-group{
+			text-align: center;
+		}
+	}
 }

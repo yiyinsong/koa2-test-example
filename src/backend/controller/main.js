@@ -6,12 +6,6 @@ const index = async (ctx, next) => {
 	});
 };
 
-const register = async (ctx, next) => {
-	await ctx.render('./frontend/sign', {
-		title: '注册'
-	});
-}
-
 const goodsList = async (ctx, next) => {
     let r = await fetch('http://jdhdev4.jdhui.com/apic/web/index.php?r=goods/goods-list/list', {
         method: 'GET'
@@ -23,6 +17,5 @@ const goodsList = async (ctx, next) => {
 
 export default { 
 	index,
-	register,
 	goodsList
 }; 
