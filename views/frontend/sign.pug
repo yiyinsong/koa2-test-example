@@ -3,7 +3,7 @@ block content
 	.layui-container.sign-container
 		fieldset.layui-elem-field
 			legend 注册
-			form.layui-form.sign-form(action="/admin/register", method="post", enctype="multipart/form-data")
+			form.layui-form.sign-form#form(action="/admin/register", method="post", enctype="multipart/form-data")
 				.layui-form-item
 					label.layui-form-label 用户头像
 					.layui-input-block
@@ -25,5 +25,5 @@ block content
 					.layui-input-block
 						input.layui-input(type="password", name='repassword', placeholder='请输入确认密码' id="userPwd2")
 				.layui-form-item.sign-btn-group
-					a.layui-btn 提交
+					a.layui-btn#submit 提交
 	script(src="frontend/scripts/sign.js", type="text/javascript")

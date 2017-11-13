@@ -1,1 +1,1 @@
-"use strict";
+"use strict";layui.use("layer",function(){var l=layui.jquery,a=layui.layer;l("#submit").on("click",function(e){""!==l("#userIcon").val()?""!==l("#userName").val()?""!==l("#userPwd").val()?""!==l("#userPwd2").val()?l("#userPwd").val()===l("#userPwd2").val()?l("#form").submit():a.alert("用户密码跟确认密码不一致",{skin:"layui-layer-lan",closeBtn:0}):a.alert("请填写确认密码",{skin:"layui-layer-lan",closeBtn:0}):a.alert("请填写用户密码",{skin:"layui-layer-lan",closeBtn:0}):a.alert("请填写用户名称",{skin:"layui-layer-lan",closeBtn:0}):a.alert("请上传用户头像",{skin:"layui-layer-lan",closeBtn:0})})});
