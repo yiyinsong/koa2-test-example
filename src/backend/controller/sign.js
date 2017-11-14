@@ -16,13 +16,8 @@ const login = async (ctx, next) => {
 }
 
 const registerHandle = async (ctx, next) => {
-    const file = ctx.request.body.files;
-    const fileName = new Date().getTime() + file.imgs.name.substr(file.imgs.name.lastIndexOf('.'));
-    const reader = fs.createReadStream(file.imgs.path);
-    const writer = fs.createWriteStream(config.uploadPath + fileName);
-    reader.pipe(writer);
-    const currentPath = config.uploadLocalPath + fileName
-    ctx.body = currentPath;
+    console.log(ctx.request.body);
+	next(); 
 }
 
 export default { 

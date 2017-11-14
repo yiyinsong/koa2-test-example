@@ -3,12 +3,13 @@ block content
 	.layui-container.sign-container
 		fieldset.layui-elem-field
 			legend 注册
-			form.layui-form.sign-form#form(action="/admin/register", method="post", enctype="multipart/form-data")
+			form.layui-form.sign-form#form(action="/admin/register", method="post")
 				.layui-form-item
 					label.layui-form-label 用户头像
 					.layui-input-block
 						.sign-upload
 							input.sign-file(type="file", name="imgs", id="userIcon")
+							input(type="hidden", name="icon", id="userIconPath")
 							button.layui-btn(type="button" id="uploadBtn") 上传头像
 							.layui-upload-list
 								img.sign-head-icon(src="", id="uploadImgThumb")

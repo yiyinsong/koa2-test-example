@@ -3,6 +3,31 @@
 layui.use('layer', function () {
     const $ = layui.jquery,
         layer = layui.layer;
+	/**
+	* function 图片上传
+	**/
+	$('#userIcon').on('change', (e) => {
+		let formData = new FormData();
+		formData.append('file', e.target.files[0]);
+		formData.append('rootPath', 'user');
+		$.ajax({
+			url: '/api/upload',
+			type: 'post',
+			cache: false,
+			data: formData,
+			processData: false,
+			contentType: false
+		}).done((res) => {
+			if(res.code === 1) {
+				$('#uploadImgThumb').attr('src', res.path);
+				$('#userIconPath').val(res.path);
+			} else {
+				console.log(res.message);
+			}
+		}).fail((res) => {
+		});
+	});
+	
     $('#submit').on('click', (e) => {
         if ($('#userIcon').val() === '') {
             layer.alert('请上传用户头像', {

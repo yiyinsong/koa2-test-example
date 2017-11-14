@@ -1,4 +1,4 @@
 export default {
-    uploadPath: './public/uploads/imgs/',
-    uploadLocalPath: './uploads/imgs/'
+    uploadPath: './public/uploads/',
+    uploadLocalPath: './uploads/'
 }

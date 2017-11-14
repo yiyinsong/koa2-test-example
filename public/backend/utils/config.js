@@ -1,1 +1,1 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default={uploadPath:"./public/uploads/imgs/",uploadLocalPath:"./uploads/imgs/"};
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default={uploadPath:"./public/uploads/",uploadLocalPath:"./uploads/"};
