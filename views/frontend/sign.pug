@@ -1,30 +1,35 @@
 extends ./includes/header.pug
 block content
-	.layui-container.sign-container
-		fieldset.layui-elem-field
-			legend 注册
-			form.layui-form.sign-form#form(action="/admin/register", method="post")
-				.layui-form-item
-					label.layui-form-label 用户头像
-					.layui-input-block
-						.sign-upload
-							input.sign-file(type="file", name="imgs", id="userIcon")
-							input(type="hidden", name="icon", id="userIconPath")
-							button.layui-btn(type="button" id="uploadBtn") 上传头像
-							.layui-upload-list
-								img.sign-head-icon(src="", id="uploadImgThumb")
-				.layui-form-item
-					label.layui-form-label 用户名称
-					.layui-input-block
-						input.layui-input(type="text", name='name', placeholder='请输入用户名', id="userName")
-				.layui-form-item
-					label.layui-form-label 用户密码
-					.layui-input-block
-						input.layui-input(type="password", name='password', placeholder='请输入密码', id="userPwd")
-				.layui-form-item
-					label.layui-form-label 确认密码
-					.layui-input-block
-						input.layui-input(type="password", name='repassword', placeholder='请输入确认密码' id="userPwd2")
-				.layui-form-item.sign-btn-group
-					a.layui-btn#submit 提交
-	script(src="frontend/scripts/sign.js", type="text/javascript")
+    .sign-body
+        .layui-container.sign-container
+            fieldset.layui-elem-field
+                legend 注册
+                form.layui-form.sign-form#form(action="/admin/register", method="post")
+                    .layui-form-item
+                        label.layui-form-label 用户头像
+                        .layui-input-block
+                            .sign-upload
+                                input.sign-file(type="file", name="imgs", id="userIcon")
+                                input(type="hidden", name="icon", id="userIconPath")
+                                button.layui-btn(type="button" id="uploadBtn") 上传头像
+                                .layui-upload-list
+                                    img.sign-head-icon(src="", id="uploadImgThumb")
+                    .layui-form-item
+                        label.layui-form-label 用户名称
+                        .layui-input-block
+                            input.layui-input(type="text", name='name', placeholder='请输入用户名', id="userName")
+                    .layui-form-item
+                        label.layui-form-label 手机号码
+                        .layui-input-block
+                            input.layui-input(type="text", name='tel', placeholder='请输入手机号码', id="userTel")
+                    .layui-form-item
+                        label.layui-form-label 用户密码
+                        .layui-input-block
+                            input.layui-input(type="password", name='password', placeholder='请输入密码', id="userPwd")
+                    .layui-form-item
+                        label.layui-form-label 确认密码
+                        .layui-input-block
+                            input.layui-input(type="password", name='repassword', placeholder='请输入确认密码' id="userPwd2")
+                    .layui-form-item.sign-btn-group
+                        a.layui-btn#submit 提交
+    script(src="frontend/scripts/sign.js", type="text/javascript")
