@@ -7,6 +7,7 @@ layui.use('layer', function () {
 	* function 图片上传
 	**/
 	$('#userIcon').on('change', (e) => {
+        if($(e.target).val() === '') return;
 		let formData = new FormData();
 		formData.append('file', e.target.files[0]);
 		formData.append('rootPath', 'user');
@@ -42,6 +43,19 @@ layui.use('layer', function () {
                 closeBtn: 0
             });
             return;
+        }
+        if ($('#userTel').val() === '') {
+            layer.alert('请输入手机号码', {
+                skin: 'layui-layer-lan',
+                closeBtn: 0
+            });
+            return;
+        } else if(!/^\d{11}$/.test($('#userTel').val())) {
+          layer.alert('手机号码格式错误', {
+            skin: 'layui-layer-lan',
+            closeBtn: 0
+            });
+            return;    
         }
         if($('#userPwd').val() === '') {
             layer.alert('请填写用户密码', {

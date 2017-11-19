@@ -3,9 +3,17 @@ import path from 'path';
 import config from '../../utils/config';
 
 const upload = async (ctx, next) => {
+    console.log(ctx.request.body);
 	const fields = ctx.request.body.fields;
+    const file = ctx.request.body.files.file;
 	let r = {};
-	if(!fields.rootPath) {
+	if(!file){
+        r = {
+			code: 0,
+			message: '参数错误',
+			path: ''
+		};
+    } else if(!fields.rootPath) {
 		r = {
 			code: 0,
 			message: '请传入rootPath',
@@ -22,7 +30,6 @@ const upload = async (ctx, next) => {
 			}
 		}
 		//上传图片
-		const file = ctx.request.body.files.file;
 		const fileName = new Date().getTime() + file.name.substr(file.name.lastIndexOf('.'));
 		const reader = fs.createReadStream(file.path);
 		const writer = fs.createWriteStream(config.uploadPath + fields.rootPath + '/' + fileName);
