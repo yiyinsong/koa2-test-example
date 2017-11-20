@@ -16,7 +16,7 @@ const UserSchema = new Schema({
     password: {
         type: String
     },
-    image: String,
+    icon: String,
     meta: {
         createTime: {
             type: Date,

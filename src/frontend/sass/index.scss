@@ -36,6 +36,10 @@
             .sign-head-icon{
                 width: 92px;
                 height: 92px;
+                display: none;
+                &.active{
+                    display: block;
+                }
             }
             .sign-btn-group{
                 text-align: center;

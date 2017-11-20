@@ -3,7 +3,6 @@ import path from 'path';
 import config from '../../utils/config';
 
 const upload = async (ctx, next) => {
-    console.log(ctx.request.body);
 	const fields = ctx.request.body.fields;
     const file = ctx.request.body.files.file;
 	let r = {};

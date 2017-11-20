@@ -20,7 +20,7 @@ layui.use('layer', function () {
 			contentType: false
 		}).done((res) => {
 			if(res.code === 1) {
-				$('#uploadImgThumb').attr('src', res.path);
+				$('#uploadImgThumb').attr('src', res.path).addClass('active');
 				$('#userIconPath').val(res.path);
 			} else {
 				console.log(res.message);
