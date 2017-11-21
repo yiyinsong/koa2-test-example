@@ -29,12 +29,22 @@ const UserSchema = new Schema({
     }
 });
 
-UserSchema.pre('save', (next) => {
+UserSchema.pre('save', function(next)  {
     if(this.isNew) {
         this.meta.createTime = this.meta.updateTime = Date.now();
     } else {
         this.meta.updateTime = Date.now();
     }
+    next();
 });
+
+UserSchema.statics = {
+    fetch() {
+        return this.find({}).sort('meta.createTime');
+    },
+    findByName(name) {
+        return this.findOne({username: name});
+    }
+};
 
 export default UserSchema;

@@ -3,11 +3,20 @@ import Koa from 'koa';
 import koaStatic from 'koa-static';
 import koaViews from 'koa-views';
 import koaBody from 'koa-body';
-import monk from 'monk';
+// import monk from 'monk';  暂时使用mongoose
+import mongoose from 'mongoose';
 
 import router from './backend/routes/route';
 
 const app = new Koa();
+const dbUrl = 'mongodb://localhost:27017/music';
+const dbConnectOptions = {
+    useMongoClient: true,
+    server: {
+        auto_reconnect: true,
+        poolSize: 10
+    }
+};
 
 app.use(koaStatic(path.join(__dirname, '../public')));
 app.use(koaViews(path.join(__dirname, '../views'), {
@@ -19,12 +28,13 @@ app.use(koaViews(path.join(__dirname, '../views'), {
 }));
 app.use(koaBody({multipart: true}));
  
-//const db = monk('localhost/music');
-//const user = db.get('user');
-//user.find().then((r) => {
-//    console.log('----------' + r); 
-//});
-//db.close();
+mongoose.connect(dbUrl, dbConnectOptions, (err, res) => {
+    if(err) {
+        console.log(err);
+    } else {
+        console.log(`connect ${dbUrl} success!`);
+    }
+});
 
 app.use(router.routes())
    .use(router.allowedMethods());
