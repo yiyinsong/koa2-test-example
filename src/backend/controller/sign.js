@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import config from '../utils/config';
+import password from '../utils/password';
 import ModelUser from '../models/user';
+import ModelSequence from '../models/sequence';
 
 const register = async (ctx, next) => {
 	await ctx.render('./frontend/sign', {
@@ -31,19 +33,24 @@ const registerHandle = async (ctx, next) => {
 
     if(message === '') {
         try {
-            const r =  await ModelUser.findByName(data.username);
-            if(r) {
+            const usernameExit =  await ModelUser.findByName(data.username);
+            const telExit = await  ModelUser.findByTel(data.tel);
+            if(usernameExit) {
                 ctx.body = '用户名称已存在，请重新填写用户名';
+            } else if(telExit) {
+                ctx.body = '手机号码已存在，请重新填写手机号码';
             } else {
+                const _encryptPassword = await password.encrypt(data.password);
+                const _id = await  ModelSequence.getSequence('userid');
                 const _data = {
+                    _id: _id,
                     username: data.username,
                     tel: data.tel,
                     icon: data.icon,
-                    password: data.password
+                    password: _encryptPassword
                 };
                 const modelUser = new ModelUser(_data);
                 const  addResult = await  modelUser.save();
-                console.log(addResult);
                 ctx.body = '注册成功！';
             }
 		} catch (err) {

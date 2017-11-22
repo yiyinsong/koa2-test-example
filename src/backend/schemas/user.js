@@ -3,6 +3,11 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
+    _id: {
+        type: Number,
+        unique: true,
+        required: true
+    },
     username: {
         type: String,
         unique: true,
@@ -44,6 +49,9 @@ UserSchema.statics = {
     },
     findByName(name) {
         return this.findOne({username: name});
+    },
+    findByTel(tel) {
+        return this.findOne({tel});
     }
 };
 

@@ -7,3 +7,6 @@ koa2 about music
 步骤
 1. npm install
 2. gulp
+
+模块功能：
+bcryptjs：密码加密
