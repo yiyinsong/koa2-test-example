@@ -33,8 +33,8 @@ const registerHandle = async (ctx, next) => {
 
     if(message === '') {
         try {
-            const usernameExit =  await ModelUser.findByName(data.username);
-            const telExit = await  ModelUser.findByTel(data.tel);
+            const usernameExit = await ModelUser.findByName(data.username);
+            const telExit = await ModelUser.findByTel(data.tel);
             if(usernameExit) {
                 ctx.body = '用户名称已存在，请重新填写用户名';
             } else if(telExit) {
@@ -51,7 +51,7 @@ const registerHandle = async (ctx, next) => {
                 };
                 const modelUser = new ModelUser(_data);
                 const  addResult = await  modelUser.save();
-                ctx.body = '注册成功！';
+                await ctx.redirect('/login');
             }
 		} catch (err) {
 			console.log(err);
@@ -61,8 +61,49 @@ const registerHandle = async (ctx, next) => {
     }
 }
 
+const loginHandle = async (ctx, next) => {
+    const data = ctx.request.body;
+    let message = '';
+    if(!data.username || data.username === '') {
+		message = '参数异常，请传入用户账号';
+	}
+    if(message === '') {
+        try {
+            console.log(typeof data.username);
+            const usernameExit = await ModelUser.findByName(data.username);
+            const telExit = await ModelUser.findByTel(data.username);
+            if(!usernameExit && !telExit) {
+                return ctx.body = '账号错误，请重新输入';
+            }
+            
+            let passwordHash = '';
+            if(usernameExit) {
+                passwordHash = await ModelUser.findPasswordByName(data.username);
+            } else {
+                passwordHash = await ModelUser.findPasswordByTel(data.username);
+            }
+            
+            const passwordCompare = await password.validate(data.password, passwordHash);
+            
+            
+            if(!passwordCompare) { 
+                return ctx.body = '密码错误，请重新输入';
+            }
+            
+            ctx.body = '登录成功！';
+
+		} catch (err) {
+			console.log(err);
+		}
+    } else {
+        ctx.body = message;
+    }
+    
+}
+
 export default { 
 	register,
 	registerHandle,
-    login
+    login,
+    loginHandle
 }; 

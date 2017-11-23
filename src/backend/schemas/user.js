@@ -14,7 +14,7 @@ const UserSchema = new Schema({
         required: true
     },
     tel: {
-        type: Number,
+        type: String,
         unique: true,
         required: true
     },
@@ -44,14 +44,25 @@ UserSchema.pre('save', function(next)  {
 });
 
 UserSchema.statics = {
-    fetch() {
-        return this.find({}).sort('meta.createTime');
+    async fetch() {
+        const r = await this.find({}).sort('meta.createTime');
+        return r;
     },
-    findByName(name) {
-        return this.findOne({username: name});
+    async findByName(name) {
+        const r = await this.findOne({username: name});
+        return r;
     },
-    findByTel(tel) {
-        return this.findOne({tel});
+    async findByTel(tel) {
+        const r = await this.findOne({tel});
+        return r;
+    },
+    async findPasswordByName(name) {
+        const r = await this.findOne({username: name});
+        return (r && r.password) || null;
+    },
+    async findPasswordByTel(tel) {
+        const r = await this.findOne({tel});
+        return (r && r.password) || null;
     }
 };
 
