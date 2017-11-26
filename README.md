@@ -1,5 +1,6 @@
 koa2 about music
 
+node版本: Node 7.6及以上
 框架：  koa2
 工具：  gulp + nodemon + bower
 数据库：mongoose

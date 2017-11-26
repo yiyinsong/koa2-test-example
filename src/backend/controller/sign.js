@@ -69,7 +69,6 @@ const loginHandle = async (ctx, next) => {
 	}
     if(message === '') {
         try {
-            console.log(typeof data.username);
             const usernameExit = await ModelUser.findByName(data.username);
             const telExit = await ModelUser.findByTel(data.username);
             if(!usernameExit && !telExit) {
@@ -89,8 +88,10 @@ const loginHandle = async (ctx, next) => {
             if(!passwordCompare) { 
                 return ctx.body = '密码错误，请重新输入';
             }
+            console.log('success login');
+            ctx.session.user = usernameExit || telExit;
             
-            ctx.body = '登录成功！';
+            ctx.body = '登录成功！'; 
 
 		} catch (err) {
 			console.log(err);
