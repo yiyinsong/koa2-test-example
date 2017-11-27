@@ -78,5 +78,23 @@ layui.use('layer', function () {
             return;
         }
         $('#form').submit();
-    })
+    });
+    $('#loginSubmit').on('click', (e) => {
+        if($('#userName').val() === '') {
+            layer.alert('请填写用户账号', {
+                skin: 'layui-layer-lan',
+                closeBtn: 0
+            });
+            return;
+        }
+        if($('#userPwd').val() === '') {
+            layer.alert('请填写用户密码', {
+                skin: 'layui-layer-lan',
+                closeBtn: 0
+            });
+            return;
+        }
+        $('#form').submit();
+    });
+
 });

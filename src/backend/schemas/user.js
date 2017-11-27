@@ -3,9 +3,10 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-    id: {
-      type: Number,
-      default: 0
+    _id: {
+        type: Number,
+        unique: true,
+        required: true
     },
     username: {
         type: String,
@@ -13,7 +14,7 @@ const UserSchema = new Schema({
         required: true
     },
     tel: {
-        type: Number,
+        type: String,
         unique: true,
         required: true
     },
@@ -33,12 +34,36 @@ const UserSchema = new Schema({
     }
 });
 
-UserSchema.pre('save', (next) => {
+UserSchema.pre('save', function(next)  {
     if(this.isNew) {
         this.meta.createTime = this.meta.updateTime = Date.now();
     } else {
         this.meta.updateTime = Date.now();
     }
+    next();
 });
+
+UserSchema.statics = {
+    async fetch() {
+        const r = await this.find({}).sort('meta.createTime');
+        return r;
+    },
+    async findByName(name) {
+        const r = await this.findOne({username: name});
+        return r;
+    },
+    async findByTel(tel) {
+        const r = await this.findOne({tel});
+        return r;
+    },
+    async findPasswordByName(name) {
+        const r = await this.findOne({username: name});
+        return (r && r.password) || null;
+    },
+    async findPasswordByTel(tel) {
+        const r = await this.findOne({tel});
+        return (r && r.password) || null;
+    }
+};
 
 export default UserSchema;

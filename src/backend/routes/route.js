@@ -8,7 +8,9 @@ const router = new Router();
 router.get('/', MainController.index);
 
 router.get('/register', SignController.register);
+router.get('/login', SignController.login);
 router.post('/admin/register', SignController.registerHandle);
+router.post('/admin/login', SignController.loginHandle);
 
 router.post('/goodslist', MainController.goodsList);
 

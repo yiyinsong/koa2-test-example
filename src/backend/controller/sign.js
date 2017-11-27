@@ -1,6 +1,8 @@
-import fs from 'fs';
+import mongoose from 'mongoose';
 import config from '../utils/config';
+import password from '../utils/password';
 import ModelUser from '../models/user';
+import ModelSequence from '../models/sequence';
 
 const register = async (ctx, next) => {
 	await ctx.render('./frontend/sign', {
@@ -19,7 +21,7 @@ const login = async (ctx, next) => {
 const registerHandle = async (ctx, next) => {
     const data = ctx.request.body;
     let message = '';
-    if(!data.name || data.name === '') {
+    if(!data.username || data.username === '') {
 		message = '参数异常，请传入用户名';
 	} else if(!data.tel || data.tel === '') {
 		message = '参数异常，请传入手机号码';
@@ -28,24 +30,80 @@ const registerHandle = async (ctx, next) => {
 	} else if(data.password !== data.repassword) {
     	message = '密码与确认密码不一致';
 	}
-	ctx.body = message;
 
-	const _data = {
-		username: data.username,
-		tel: data.tel,
-		icon: data.icon,
-		password: data.password
-	};
-	const modelUser = new ModelUser();
-	// async () => {
-        // const r = await modelUser.save();
-	// }
+    if(message === '') {
+        try {
+            const usernameExit = await ModelUser.findByName(data.username);
+            const telExit = await ModelUser.findByTel(data.tel);
+            if(usernameExit) {
+                ctx.body = '用户名称已存在，请重新填写用户名';
+            } else if(telExit) {
+                ctx.body = '手机号码已存在，请重新填写手机号码';
+            } else {
+                const _encryptPassword = await password.encrypt(data.password);
+                const _id = await  ModelSequence.getSequence('userid');
+                const _data = {
+                    _id: _id,
+                    username: data.username,
+                    tel: data.tel,
+                    icon: data.icon,
+                    password: _encryptPassword
+                };
+                const modelUser = new ModelUser(_data);
+                const  addResult = await  modelUser.save();
+                await ctx.redirect('/login');
+            }
+		} catch (err) {
+			console.log(err);
+		}
+    } else {
+        ctx.body = message;
+    }
+}
 
-	ctx.body = '注册成功！';
+const loginHandle = async (ctx, next) => {
+    const data = ctx.request.body;
+    let message = '';
+    if(!data.username || data.username === '') {
+		message = '参数异常，请传入用户账号';
+	}
+    if(message === '') {
+        try {
+            const usernameExit = await ModelUser.findByName(data.username);
+            const telExit = await ModelUser.findByTel(data.username);
+            if(!usernameExit && !telExit) {
+                return ctx.body = '账号错误，请重新输入';
+            }
+            
+            let passwordHash = '';
+            if(usernameExit) {
+                passwordHash = await ModelUser.findPasswordByName(data.username);
+            } else {
+                passwordHash = await ModelUser.findPasswordByTel(data.username);
+            }
+            
+            const passwordCompare = await password.validate(data.password, passwordHash);
+            
+            
+            if(!passwordCompare) { 
+                return ctx.body = '密码错误，请重新输入';
+            }
+            console.log('success login');
+            ctx.session.user = usernameExit || telExit;
+            ctx.body = ctx.session.user;
+
+		} catch (err) {
+			console.log(err);
+		}
+    } else {
+        ctx.body = message;
+    }
+    
 }
 
 export default { 
 	register,
 	registerHandle,
-    login
+    login,
+    loginHandle
 }; 
