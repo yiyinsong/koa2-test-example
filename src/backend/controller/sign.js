@@ -4,6 +4,7 @@ import password from '../utils/password';
 import ModelUser from '../models/user';
 import ModelSequence from '../models/sequence';
 
+
 const register = async (ctx, next) => {
 	await ctx.render('./frontend/sign', {
 		title: '注册',
@@ -16,7 +17,7 @@ const login = async (ctx, next) => {
 		title: '登录',
         type: 1
 	});
-}
+} 
 
 const registerHandle = async (ctx, next) => {
     const data = ctx.request.body;
@@ -88,9 +89,8 @@ const loginHandle = async (ctx, next) => {
             if(!passwordCompare) { 
                 return ctx.body = '密码错误，请重新输入';
             }
-            console.log('success login');
             ctx.session.user = usernameExit || telExit;
-            ctx.body = ctx.session.user;
+            ctx.redirect('/');
 
 		} catch (err) {
 			console.log(err);
