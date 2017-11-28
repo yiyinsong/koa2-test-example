@@ -12,19 +12,19 @@ import MongoStore from 'koa-generic-session-mongo';
 
 import router from './backend/routes/route';
 
-const app = new Koa(); 
+const app = new Koa();
 const dbUrl = 'mongodb://localhost:27017/music';
 const dbConnectOptions = {
     useMongoClient: true,
     server: {
         auto_reconnect: true,
-        poolSize: 10 
+        poolSize: 10
     }
 };
 
 //在项目中使用的cookie，名称需要进行签名
 app.keys = ['user'];
- 
+
 const sessionConfig = {
     key: 'SESSIONID',
     store: new MongoStore({
@@ -43,9 +43,9 @@ app.use(koaViews(path.join(__dirname, '../views'), {
     },
     extension: 'pug'
 }));
-app.use(koaBody({multipart: true})); 
+app.use(koaBody({multipart: true}));
 app.use(session(sessionConfig, app));
- 
+
 mongoose.connect(dbUrl, dbConnectOptions, (err, res) => {
     if(err) {
         console.log(err);
