@@ -7,8 +7,7 @@ import koaBody from 'koa-body';
 import session from 'koa-session';
 //import monk from 'monk';  暂时使用mongoose
 import mongoose from 'mongoose';
-//koa-generic-session-mongo 使用mongodb使登录信息持久有效
-import MongoStore from 'koa-generic-session-mongo';
+import MongooseStore from './backend/utils/mongoose-store';
 
 import router from './backend/routes/route';
 console.log('-----------------start------------------'); 
@@ -26,15 +25,12 @@ const dbConnectOptions = {
 app.keys = ['keys', 'keykeys'];
 const sessionConfig = { 
     key: 'SESSIONID',
-    maxAge: 86400000,
+    maxAge: 5000,
     overwrite: true,
     httpOnly: true,
     signed: true,
     rolling: false,
-    store: new MongoStore({
-        url: dbUrl,  
-        collection: 'sessions'
-    })
+    store: new MongooseStore()
 };
  
 
