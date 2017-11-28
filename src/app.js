@@ -25,14 +25,13 @@ const dbConnectOptions = {
 app.keys = ['keys', 'keykeys'];
 const sessionConfig = { 
     key: 'SESSIONID',
-    maxAge: 5000,
+    maxAge: 86400000,
     overwrite: true,
     httpOnly: true,
     signed: true,
     rolling: false,
     store: new MongooseStore()
 };
- 
 
 app.use(koaStatic(path.join(__dirname, '../public')));
 app.use(koaViews(path.join(__dirname, '../views'), {

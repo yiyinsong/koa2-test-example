@@ -89,7 +89,7 @@ const loginHandle = async (ctx, next) => {
             if(!passwordCompare) { 
                 return ctx.body = '密码错误，请重新输入';
             }
-            ctx.session.user = usernameExit || telExit;
+            ctx.session.user = usernameExit || telExit; 
             ctx.redirect('/');
 
 		} catch (err) {

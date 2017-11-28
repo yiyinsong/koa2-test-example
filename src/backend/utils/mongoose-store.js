@@ -31,7 +31,7 @@ class MongooseStore {
         sess.ttl = new Date((ttl || ('number' == typeof maxAge
             ? maxAge : 86400000)) + Date.now());
         try {
-            const r = await this.SessionModel.findOneAndUpdate({_id: key}, {value: JSON.stringify(sess)}, {upsert: true, returnNewDocument: true});
+            const r = await (new this.SessionModel({_id: key, value: JSON.stringify(sess)})).save();
             return r;
         } catch(err) {
             console.log(err);
