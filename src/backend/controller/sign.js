@@ -98,12 +98,17 @@ const loginHandle = async (ctx, next) => {
     } else {
         ctx.body = message;
     }
-    
+}
+
+const logoutHandle = async (ctx, next) => {
+    ctx.session = null;
+    ctx.redirect('/');
 }
 
 export default { 
 	register,
 	registerHandle,
     login,
-    loginHandle
+    loginHandle,
+    logoutHandle
 }; 

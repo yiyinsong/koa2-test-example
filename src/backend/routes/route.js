@@ -11,6 +11,7 @@ router.get('/register', SignController.register);
 router.get('/login', SignController.login);
 router.post('/admin/register', SignController.registerHandle);
 router.post('/admin/login', SignController.loginHandle);
+router.get('/logout', SignController.logoutHandle);
 
 router.post('/goodslist', MainController.goodsList);
 

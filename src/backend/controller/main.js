@@ -1,10 +1,11 @@
 import fetch from 'isomorphic-fetch';
 
 const index = async (ctx, next) => {
-    // await ctx.render('./frontend/index', {
-	// 	title: '首页
-	// });
-   ctx.body = ctx.session;
+    console.log(ctx.session.user);
+    await ctx.render('./frontend/index', {
+        title: '首页',
+        userInfo: ctx.session.user
+    })
 };
 
 const goodsList = async (ctx, next) => {
