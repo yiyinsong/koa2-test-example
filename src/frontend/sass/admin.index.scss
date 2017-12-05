@@ -1,0 +1,40 @@
+html,body {
+    height: 100%;
+}
+.admin-left {
+    width: 200px;
+    height: 100%;
+    float: left;
+    background-color: #363b5b;
+    h1 {
+        color: #fff;
+        font-size: 16px;
+        padding: 15px 10px;
+        background-color: #2d3149;
+    }
+    ul {
+        li {
+            color: #8688A2;
+            padding: 10px; 
+            font-size: 14px;
+            -webkit-transition: all 500ms;
+            transition: all 500ms;
+            cursor: pointer;
+            &:before {
+                margin-right: 5px;
+                font-size: 18px;
+            }
+            &:hover {
+                background-color: #2d3149;
+            }
+            &.active {
+                background-color: #1caf9a;
+                color: #fff;
+                &:hover {
+                    background-color: #1caf9a;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}

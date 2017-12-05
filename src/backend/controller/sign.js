@@ -105,10 +105,18 @@ const logoutHandle = async (ctx, next) => {
     ctx.redirect('/');
 }
 
+const isLogged = async (ctx, next) => {
+    if(!ctx.session.user) {
+        return ctx.redirect('/login');
+    }
+    return next();
+}
+
 export default { 
 	register,
 	registerHandle,
     login,
     loginHandle,
-    logoutHandle
+    logoutHandle,
+    isLogged
 }; 

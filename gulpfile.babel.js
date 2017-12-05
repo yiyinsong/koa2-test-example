@@ -7,20 +7,12 @@ const browserSync = require('browser-sync').create();
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
-gulp.task('backendSass', ()=>{
-    return gulp.src('src/backend/sass/*.scss')
-        .pipe($.sass())
-        .pipe($.cssnano())
-//        .pipe($.rename({suffix: '.min'}))
-        .pipe($.concat('index.min.css'))
-        .pipe(gulp.dest('public/backend/css'));
-});
-gulp.task('frontendSass', ()=>{
+gulp.task('sass', ()=>{
     return gulp.src('src/frontend/sass/*.scss')
         .pipe($.sass())
         .pipe($.cssnano())
-//        .pipe($.rename({suffix: '.min'}))
-        .pipe($.concat('index.min.css'))
+        .pipe($.rename({suffix: '.min'}))
+//        .pipe($.concat('index.min.css'))
         .pipe(gulp.dest('public/frontend/css'));
 });
 
@@ -54,7 +46,6 @@ gulp.task('server', function() {
     }); 
 
     gulp.watch('src/**/*.js' , ['scripts']);
-    gulp.watch('src/backend/sass/*.scss', ['backendSass']);    
-	gulp.watch('src/frontend/sass/*.scss', ['frontendSass']);
+	gulp.watch('src/frontend/sass/*.scss', ['sass']);
 });
 gulp.task('default', ['server']);  

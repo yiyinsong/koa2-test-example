@@ -1,7 +1,6 @@
 import fetch from 'isomorphic-fetch';
 
 const index = async (ctx, next) => {
-    console.log(ctx.session.user);
     await ctx.render('./frontend/index', {
         title: '首页',
         userInfo: ctx.session.user
