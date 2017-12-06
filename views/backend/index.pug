@@ -1,6 +1,18 @@
 extends ./includes/header.pug
 block content
+    .admin-top
+        .admin-top-left
+            h1.iconfont.icon-music Music Admin
+        .admin-top-right
+            dl.admin-user
+                dt
+                    span #{userInfo.username}
+                    img(src=userInfo.icon)
+                dd
+                    p.iconfont.icon-cd_icon 歌曲收藏数量
+                        span 31
+                    a.iconfont.icon-logout(href="/logout") 退出登录
     .admin-left
-        h1 Music Admin
         ul
             li.iconfont.icon-list 列表管理
+    script(type="text/javascript", src="frontend/scripts/admin.index.js")

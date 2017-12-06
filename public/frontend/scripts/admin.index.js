@@ -1,1 +1,1 @@
-"use strict";
+"use strict";$(".admin-user").on("click",function(t){$(t.currentTarget).toggleClass("active")});
