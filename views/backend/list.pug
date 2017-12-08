@@ -1,1 +1,19 @@
 extends ./includes/header.pug
+block content
+	.container
+		button.layui-btn.layui-btn-normal#updateList 从网易云音乐更新歌单
+		table.layui-table(lay-skin="line")
+			thead
+				th 封面
+				th 名称
+				th 播放次数
+				th 作者
+				th 描述
+			tbody
+				tr
+					td 1
+					td 2
+					td 3
+					td 4
+					td 5
+	script(type="text/javascript", src="frontend/scripts/admin.music.js")

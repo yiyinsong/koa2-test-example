@@ -1,3 +1,7 @@
+/**
+ * @description 渲染后台主页面
+ * @return null.
+ */
 const index = async (ctx, next) => {
     await ctx.render('./backend/index', {
         title: '后台管理',

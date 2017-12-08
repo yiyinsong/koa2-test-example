@@ -1,3 +1,12 @@
+input:-webkit-autofill, 
+textarea:-webkit-autofill, 
+select:-webkit-autofill { 
+       -webkit-box-shadow: 0 0 0 1000px white inset; 
+}
+ input[type=text]:focus, input[type=password]:focus, textarea:focus {
+      -webkit-box-shadow: 0 0 0 1000px tranparent inset; 
+}
+
 .sign-body{
     position: absolute;
     top: 0;
@@ -6,9 +15,11 @@
     right: 0;
     &.register-body{
         background: url('../../images/register_bg.jpg') no-repeat center;
+		background-size: cover;
     }
     &.login-body{
         background: url('../../images/login_bg.jpg') no-repeat center;
+		background-size: cover;
     }
     .sign-container{
         padding-top: 20px;
@@ -84,6 +95,7 @@
                     background: none;
                     border: 0;
                     font-size: 12px;
+					width: 95%;
                 }
             }
         }

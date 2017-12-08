@@ -10,7 +10,6 @@ import mongoose from 'mongoose';
 import MongooseStore from './backend/utils/mongoose-store';
 
 import router from './backend/routes/route';
-console.log('-----------------start------------------'); 
 const app = new Koa(); 
 const dbUrl = 'mongodb://localhost:27017/music';
 const dbConnectOptions = {

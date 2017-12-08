@@ -4,21 +4,30 @@ import password from '../utils/password';
 import ModelUser from '../models/user';
 import ModelSequence from '../models/sequence';
 
-
+/**
+ * @description 渲染注册页面
+ * @return null.
+ */
 const register = async (ctx, next) => {
 	await ctx.render('./frontend/sign', {
 		title: '注册',
         type: 0
 	});
 }
-
+/**
+ * @description 渲染登录页面
+ * @return null.
+ */
 const login = async (ctx, next) => {
 	await ctx.render('./frontend/sign', {
 		title: '登录',
         type: 1
 	});
 } 
-
+/**
+ * @description 注册功能处理
+ * @return null.
+ */
 const registerHandle = async (ctx, next) => {
     const data = ctx.request.body;
     let message = '';
@@ -61,7 +70,10 @@ const registerHandle = async (ctx, next) => {
         ctx.body = message;
     }
 }
-
+/**
+ * @description 登录功能处理
+ * @return null.
+ */
 const loginHandle = async (ctx, next) => {
     const data = ctx.request.body;
     let message = '';
@@ -99,12 +111,18 @@ const loginHandle = async (ctx, next) => {
         ctx.body = message;
     }
 }
-
+/**
+ * @description 退出登录
+ * @return null.
+ */
 const logoutHandle = async (ctx, next) => {
     ctx.session = null;
     ctx.redirect('/');
 }
-
+/**
+ * @description 验证是否已经登录
+ * @return null.
+ */
 const isLogged = async (ctx, next) => {
     if(!ctx.session.user) {
         return ctx.redirect('/login');

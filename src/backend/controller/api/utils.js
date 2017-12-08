@@ -2,6 +2,17 @@ import fs from 'fs';
 import path from 'path';
 import config from '../../utils/config';
 
+/**
+ * @type 接口
+ * @description 图片上传功能
+ * @params {Object} ctx.request.body.fields 上传信息
+ * @params {Object} ctx.request.body.file   上传图片信息
+ * @return {Object} {
+		code: 状态码 0 错误 1 成功
+		message: 提示信息
+		path: 图片相对前台的路径
+   }
+ */
 const upload = async (ctx, next) => {
 	const fields = ctx.request.body.fields;
     const file = ctx.request.body.files.file;

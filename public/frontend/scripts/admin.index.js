@@ -1,1 +1,1 @@
-"use strict";$(".admin-user").on("click",function(t){$(t.currentTarget).toggleClass("active")});
+"use strict";var $iframe=$("iframe"),windowUrl=window.location.origin;$(".admin-user").on("click",function(i){$(i.currentTarget).toggleClass("active")}),$(".admin-left li").on("click",function(i){var r=$(i.currentTarget);r.addClass("active"),$iframe.attr("src",windowUrl+r.data("url"))});

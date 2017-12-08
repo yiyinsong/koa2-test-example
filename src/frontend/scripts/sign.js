@@ -2,10 +2,11 @@
 
 layui.use('layer', function () {
     const $ = layui.jquery,
-        layer = layui.layer;
+          layer = layui.layer;
+	
 	/**
-	* function 图片上传
-	**/
+	 * @description 注册 => 用户头像上传
+	 **/
 	$('#userIcon').on('change', (e) => {
         if($(e.target).val() === '') return;
 		let formData = new FormData();
@@ -29,6 +30,9 @@ layui.use('layer', function () {
 		});
 	});
 	
+	/**
+	 * @description 注册 => 验证用户数据并且提交用户数据
+	 **/
     $('#submit').on('click', (e) => {
         if ($('#userIcon').val() === '') {
             layer.alert('请上传用户头像', {
@@ -79,6 +83,10 @@ layui.use('layer', function () {
         }
         $('#form').submit();
     });
+	
+	/**
+	 * @description 登录 => 验证用户数据并且提交用户数据
+	 **/
     $('#loginSubmit').on('click', (e) => {
         if($('#userName').val() === '') {
             layer.alert('请填写用户账号', {

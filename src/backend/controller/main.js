@@ -1,5 +1,9 @@
 import fetch from 'isomorphic-fetch';
 
+/**
+ * @description 渲染前台主页面
+ * @return null.
+ */
 const index = async (ctx, next) => {
     await ctx.render('./frontend/index', {
         title: '首页',

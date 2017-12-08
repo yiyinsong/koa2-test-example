@@ -14,5 +14,7 @@ block content
                     a.iconfont.icon-logout(href="/logout") 退出登录
     .admin-left
         ul
-            li.iconfont.icon-list 列表管理
+            li.iconfont.icon-list(data-url='/admin/list') 歌单管理
+    .admin-right
+        iframe(src="", id="iframe")
     script(type="text/javascript", src="frontend/scripts/admin.index.js")
