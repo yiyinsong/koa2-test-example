@@ -7,6 +7,8 @@ import ModelSequence from '../models/sequence';
 /**
  * @description 渲染注册页面
  * @return null.
+ * @renderParams {String} title 标题
+ * @renderParams {Number} type 0=>注册 1=>登录
  */
 const register = async (ctx, next) => {
 	await ctx.render('./frontend/sign', {
@@ -17,6 +19,8 @@ const register = async (ctx, next) => {
 /**
  * @description 渲染登录页面
  * @return null.
+ * @renderParams {String} title 标题
+ * @renderParams {Number} type 0=>注册 1=>登录
  */
 const login = async (ctx, next) => {
 	await ctx.render('./frontend/sign', {
