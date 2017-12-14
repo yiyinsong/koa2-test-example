@@ -70,8 +70,19 @@ PlayListSchema.statics = {
 	 * @params {Array} arr 要删除的多条数据的值
 	 */
 	async removeMulti(key, arr) {
-		return await this.remove({key:{ $in: arr}});
-	}
+		let _c = {};
+		_c[key] = { $in: arr};
+		return await this.remove(_c);
+	},
+	/**
+	 * @description 获取歌单详情
+	 * @method findById
+	 * @params {Number} id
+	 * @return {Object} 对应歌单id详情
+	 */
+	async findById(id) {
+		return await this.findOne({id});
+	},
 };
 
 export default PlayListSchema;

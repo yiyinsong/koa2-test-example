@@ -75,7 +75,12 @@ layui.use('layer', function () {
 		if(!_hasCheck) {
 			return layer.alert('请选择要删除的歌单');
 		}
-		_ids = _ids.substr(1);
-		window.location.href = `/admin/list/removeMulti?ids=${_ids}`;
+		const _layerConfirm = layer.confirm('是否删除所选歌单？', {
+			btn: ['确定', '取消']
+		}, function() {
+			layer.close(_layerConfirm);
+			_ids = _ids.substr(1);
+			window.location.href = `/admin/list/removeMulti?ids=${_ids}`;
+		});
 	});
 });

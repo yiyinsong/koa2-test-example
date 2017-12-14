@@ -49,18 +49,34 @@ const remove = async (ctx, next) => {
 const removeMulti = async (ctx, next) => {
 	const _query = ctx.request.query;
 	let _ids = _query.ids;
-	console.log(_ids);
 	if(_ids) {
 		_ids = _ids.split(',');
-		console.log(_ids);
-		await PlaylistModel.removeMulti('id', _ids); 
+		await PlaylistModel.removeMulti('id', _ids);  
 		return ctx.redirect('/admin/list');
 	}
 	console.log('删除失败');
+}
+/**
+ * @description 歌单详情
+ * @params {String} id 歌单id
+ * @return null
+ */
+const listDetail = async (ctx, next) => {
+	const _query = ctx.request.query;
+	let _id = _query.id;
+	if(_id) {
+		const r = await PlaylistModel.findById(_id);
+		return await ctx.render('./backend/list-detail', {
+			title: '歌单详情',
+			data: r || {} 
+		});
+    }
+	console.log('请传入歌单id');
 }
 
 export default {
 	list,
 	remove,
-	removeMulti
+	removeMulti,
+	listDetail
 }

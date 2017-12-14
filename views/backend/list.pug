@@ -33,7 +33,7 @@ block content
 							td=item.playNum
 							td=item.author
 							td
-								a.layui-btn.layui-btn-primary.layui-btn-small(href="#") 查看
+								a.layui-btn.layui-btn-primary.layui-btn-small(href="/admin/list/detail?id=" + item.id) 查看
 								a.layui-btn.layui-btn-danger.layui-btn-small(href="/admin/list/remove?id=" + item.id) 删除
 		.paging
 			.paging-container
