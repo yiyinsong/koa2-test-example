@@ -1,0 +1,1 @@
+"use strict";var Utils={getQueryString:function(n){var t=new RegExp("(^|&)"+n+"=([^&]*)(&|$)","i"),e=window.location.search.substr(1).match(t);return null!=e?unescape(e[2]):null}};

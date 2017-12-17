@@ -40,6 +40,12 @@ router.get('/admin/list', SignController.isLogged, AdminMusicController.list);
  */
 router.post('/api/admin/listupdate', AdminMusicApi.getMuiscListFromWY);
 /**
+ * @url api/admin/listdetailupdate
+ * @params {String} source 网易云音乐歌曲链接
+ * @params {Number} id   歌单id
+ */
+router.post('/api/admin/listdetailupdate', AdminMusicApi.getMusicDetailFromWY); 
+/**
  * @url admin/list/remove
  * @params {Number} id 歌单id
  */

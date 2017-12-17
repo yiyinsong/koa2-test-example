@@ -1,4 +1,5 @@
 import PlaylistModel from '../models/playlist';
+import SongModel from '../models/song';
 /**
  * @description 渲染后台列表页面
  * @return null
@@ -66,9 +67,11 @@ const listDetail = async (ctx, next) => {
 	let _id = _query.id;
 	if(_id) {
 		const r = await PlaylistModel.findById(_id);
+		const l = await SongModel.fetch();
 		return await ctx.render('./backend/list-detail', {
 			title: '歌单详情',
-			data: r || {} 
+			data: r || {},
+			list: l || []
 		});
     }
 	console.log('请传入歌单id');

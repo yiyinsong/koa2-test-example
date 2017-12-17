@@ -9,6 +9,7 @@ const Schema = mongoose.Schema;
    @params {String} title 歌单标题
    @params {String} playNum 播放次数
    @params {String} author 作者
+   @params {String} desc 歌单描述
  */
 const PlayListSchema = new Schema({ 
     id: {
@@ -20,6 +21,7 @@ const PlayListSchema = new Schema({
 	title: String,
 	playNum: String,
 	author: String,
+	desc: String,
 	meta: {
         createTime: {
             type: Date,

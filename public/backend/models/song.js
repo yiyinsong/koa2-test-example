@@ -1,0 +1,1 @@
+"use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(exports,"__esModule",{value:!0});var _mongoose=require("mongoose"),_mongoose2=_interopRequireDefault(_mongoose),_song=require("../schemas/song"),_song2=_interopRequireDefault(_song),SongModel=_mongoose2.default.model("song",_song2.default);exports.default=SongModel;

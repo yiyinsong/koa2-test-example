@@ -2,8 +2,43 @@ extends ./includes/header.pug
 block content
 	.container
 		.page-list-detail
-			.page-list-dt
-				.list-img
-					img(src=data.img)
-			.page-list-db
-			
+			.page-ld-info
+				img(src=data.img)
+				h5=data.title
+				span 播放次数：#{data.playNum}
+				strong 作者：#{data.author}
+				p
+					span.layui-btn.layui-btn-normal.layui-btn-small#updateDetailList 更新歌曲列表
+					a.layui-btn.layui-btn-danger.layui-btn-small("/admin/list/remove?id=" + data.id) 删除
+			.page-ld-list
+				.page-ld-list-c
+					table.layui-table(lay-skin="nob")
+						colgroup
+							col(width="10%")
+							col(width="15%")
+							col(width="10%")
+							col(width="15%")
+							col(width="20%")
+							col(width="25%")
+						thead
+							th 
+								input(type="checkbox")
+							th 歌名
+							th 时长
+							th 歌手
+							th 专辑
+							th 操作
+						tbody
+							each item in list
+								tr
+									td
+										input(type="checkbox")
+									td=item.title
+									td=item.length
+									td=item.singer
+									td=item.album
+									td
+										span.layui-btn.layui-btn-primary.layui-btn-small 查看
+										a.layui-btn.layui-btn-danger.layui-btn-small("/admin/list/remove?id=" + item.id) 删除
+	script(type="text/javascript", src="/frontend/scripts/utils/utils.js")
+	script(type="text/javascript", src="/frontend/scripts/admin.playdetail.js")

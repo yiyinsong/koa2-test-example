@@ -3,8 +3,10 @@ block content
 	.container
 		.page-list
 			.btn-block
-				button.layui-btn.layui-btn-normal.layui-btn-small#updateList 从网易云音乐更新歌单
-				button.layui-btn.layui-btn-danger.layui-btn-small#btnRemove 删除所选歌单
+				h1 歌单管理
+				div
+					button.layui-btn.layui-btn-normal#updateList 从网易云音乐更新歌单
+					button.layui-btn.layui-btn-danger#btnRemove 删除所选歌单
 			table.layui-table(lay-skin="line")
 				colgroup
 					col(width="5%")
@@ -33,7 +35,7 @@ block content
 							td=item.playNum
 							td=item.author
 							td
-								a.layui-btn.layui-btn-primary.layui-btn-small(href="/admin/list/detail?id=" + item.id) 查看
+								a.layui-btn.layui-btn-primary.layui-btn-small(href="/admin/list/detail?id=" + item.id+'&oid=' + item._id) 查看
 								a.layui-btn.layui-btn-danger.layui-btn-small(href="/admin/list/remove?id=" + item.id) 删除
 		.paging
 			.paging-container
@@ -74,4 +76,4 @@ block content
 						a(href="#") ...
 				a(href="/admin/list?limit="+limit+"&page="+(page == total ? total : page + 1)) 下一页 
 				a(href="/admin/list?limit="+limit+"&page="+total) 尾页
-	script(type="text/javascript", src="/frontend/scripts/admin.music.js")
+	script(type="text/javascript", src="/frontend/scripts/admin.playlist.js")

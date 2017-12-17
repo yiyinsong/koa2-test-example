@@ -2,6 +2,9 @@ html,body {
     height: 100%;
     color: #363f44;
 }
+body {
+    background-color: #f0f3f4;
+}
 a {
     color: #363f44;
 }
@@ -194,10 +197,28 @@ a {
 }
 .container {
 	padding: 10px 20px;
+    box-sizing: border-box;
 }
 .page-list {
 	.btn-block {
-		text-align: right;
+        background-color: #fff;
+        padding: 10px;
+        margin: 10px 0 20px 0;
+        box-sizing: border-box;
+        border-left: 5px solid #1caf9a;
+        &:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        &>h1 {
+            float: left;
+            line-height: 38px;
+            font-size: 16px;
+        }
+        &>div {
+            float: right;
+        }
 	}
 	table,
 	th{
@@ -246,4 +267,67 @@ a {
 			}
 		}
 	}
+}
+.page-list-detail {
+    .page-ld-info {
+        position: fixed;
+        background-color: #fff;
+        width: 30%;
+        box-sizing: border-box;
+        padding: 10px;
+        h5 {
+            font-size: 16px;
+            padding: 10px 0 0;
+        }
+        &>span {
+            color: #999;
+            display: block;
+            padding: 5px 0 0;
+        }
+        &>strong {
+            color: #666;
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 5px 0 0;
+        }
+        p {
+            margin-top: 10px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+    }
+    .page-ld-list {
+        float: right;
+        width: 70%;
+        box-sizing: border-box;
+        padding-left: 20px;
+        margin-bottom: 10px;
+        .page-ld-list-c {
+            background-color: #fff;
+            float: left;
+            table {
+                margin: 0;
+                th {
+                    background-color: #fafafa;
+                }
+            }
+            th,
+            td {
+                text-align: center;
+                input {
+                    vertical-align: middle;
+                }
+            }
+            th {
+                font-size: 14px;
+            }
+            td {
+                font-size: 12px;
+            }
+        }
+    }
+}
+.page-list-detail-btn {
+  text-align: right;
 }
