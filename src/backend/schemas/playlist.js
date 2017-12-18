@@ -83,7 +83,7 @@ PlayListSchema.statics = {
 	 * @return {Object} 对应歌单id详情
 	 */
 	async findById(id) {
-		return await this.findOne({id});
+		return await this.findOne({id}); 
 	},
 };
 

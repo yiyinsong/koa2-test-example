@@ -8,12 +8,15 @@ const Schema = mongoose.Schema;
    @params {String} img 歌曲封面
    @params {String} title 歌曲标题
    @params {String} singer 歌手
-   @params {Object} playlist 歌曲所关联的歌单
+   @params {String} pid 歌单id
+   @params {String} album 专辑
+   @params {String} length 时长
+   @params {Object} frompl 歌曲所关联的歌单
  */
 const SongSchema = new Schema({
   id: {
-		type: Number,
-		unique: true,
+		type: String,
+		unique: true, 
     required: true
 	},
 	img: String,
@@ -21,9 +24,10 @@ const SongSchema = new Schema({
 	singer: String,
   album: String,
   length: String,
-  playlist: {
+  pid: String,
+  frompl: {
 		type: Schema.Types.ObjectId,
-		ref: 'Playlist'
+		ref: 'playlist'
 	},
 	meta: {
         createTime: {
@@ -58,16 +62,16 @@ SongSchema.statics = {
 	 * @method clear
 	 * @return null
 	 */
-     async clear() {
-        return await this.remove({});
+     async clear(oid) {
+        return await this.remove({pid: oid}); 
     },
     /**
      * @description 获取歌单歌曲列表
      * @method fetch
      * @return {Array} 歌单列表
      */
-     async fetch() {
-      return await this.find();
+     async fetch(oid) {
+      return await this.find({pid: oid});  
      }
 // 	/**
 // 	 * @description 清空歌单某一条数据

@@ -65,9 +65,10 @@ const removeMulti = async (ctx, next) => {
 const listDetail = async (ctx, next) => {
 	const _query = ctx.request.query;
 	let _id = _query.id;
+	let _oid = _query.oid;
 	if(_id) {
 		const r = await PlaylistModel.findById(_id);
-		const l = await SongModel.fetch();
+		const l = await SongModel.fetch(_oid);
 		return await ctx.render('./backend/list-detail', {
 			title: '歌单详情',
 			data: r || {},

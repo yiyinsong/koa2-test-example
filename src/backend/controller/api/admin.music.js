@@ -73,16 +73,16 @@ const getMusicDetailFromWY = async (ctx, next) => {
     const $ = cheerio.load(r.text, {decodeEntities: false});
     let data = [];
     const dom = $('#m-playlist');
-
     dom.find('#song-list-pre-cache .f-hide li').each((k, v) => {
     	let _href = $(v).find('a').attr('href');
     	data.push({
     		id: _href.substr(_href.indexOf('=')+1),
-    		title: $(v).find('a').html(), 
-    		playlist: _oid
+    		title: $(v).find('a').html(),
+    		pid: _oid,
+    		frompl: _oid
     	});
     });
-    const removeResult = await SongModel.clear();
+    const removeResult = await SongModel.clear(_oid);
 	const saveResult = await SongModel.collection.insertMany(data);
 	if(saveResult) {
 		ctx.body = { 
@@ -91,7 +91,7 @@ const getMusicDetailFromWY = async (ctx, next) => {
 			data: data 
 		};
 	} else {
-		ctx.body = { 
+		ctx.body = {  
 			code: 0,
 			message: '更新失败',
 			data: '' 

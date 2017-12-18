@@ -14,29 +14,32 @@ block content
 				.page-ld-list-c
 					table.layui-table(lay-skin="nob")
 						colgroup
+							col(width="5%")
 							col(width="10%")
 							col(width="15%")
 							col(width="10%")
 							col(width="15%")
-							col(width="20%")
+							col(width="15%")
 							col(width="25%")
 						thead
 							th 
 								input(type="checkbox")
+							th 序号
 							th 歌名
 							th 时长
 							th 歌手
 							th 专辑
 							th 操作
 						tbody
-							each item in list
+							each item, key in list
 								tr
 									td
 										input(type="checkbox")
+									td=key+1
 									td=item.title
 									td=item.length
 									td=item.singer
-									td=item.album
+									td=item.playlist
 									td
 										span.layui-btn.layui-btn-primary.layui-btn-small 查看
 										a.layui-btn.layui-btn-danger.layui-btn-small("/admin/list/remove?id=" + item.id) 删除

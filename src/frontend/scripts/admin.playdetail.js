@@ -23,11 +23,7 @@ layui.use('layer', function () {
 					}
 				}).done( r => {
 					layer.close(layerMessage);
-					// if(r.code === 1) {
-					// 	window.location.reload();
-					// } else {
-					// 	layer.alert('更新失败');     
-					// }
+					window.location.reload();
 				}).fail( err => {
 					console.log(err);
 					layer.alert('更新失败');
