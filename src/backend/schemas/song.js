@@ -62,35 +62,35 @@ SongSchema.statics = {
 	 * @method clear
 	 * @return null
 	 */
-     async clear(oid) {
-        return await this.remove({pid: oid}); 
-    },
+  async clear(oid) {
+    return await this.remove({pid: oid}); 
+  },
     /**
      * @description 获取歌单歌曲列表
      * @method fetch
      * @return {Array} 歌单列表
      */
-     async fetch(oid) {
-      return await this.find({pid: oid});  
-     }
-// 	/**
-// 	 * @description 清空歌单某一条数据
-// 	 * @method remove
-// 	 * @return null
-// 	 */
-// 	async removeOne(c) {
-// 		return await this.remove(c);
-// 	},
-// 	/**
-// 	 * @description 删除歌单多条数据
-// 	 * @params {String} key 要删除的字段名称
-// 	 * @params {Array} arr 要删除的多条数据的值
-// 	 */
-// 	async removeMulti(key, arr) {
-// 		let _c = {};
-// 		_c[key] = { $in: arr};
-// 		return await this.remove(_c);
-// 	},
+  async fetch(oid) {
+    return await this.find({pid: oid});  
+  }, 
+	/**
+	 * @description 清空歌曲列表某一条数据
+	 * @method remove
+	 * @return null
+	 */
+	async removeOne(c) {
+		return await this.remove(c);
+	},
+	/**
+	 * @description 删除歌曲多条数据
+	 * @params {String} key 要删除的字段名称
+	 * @params {Array} arr 要删除的多条数据的值
+	 */
+	async removeMulti(key, arr) {
+		let _c = {};
+		_c[key] = { $in: arr};
+		return await this.remove(_c);
+	},
 // 	/**
 // 	 * @description 获取歌单详情
 // 	 * @method findById

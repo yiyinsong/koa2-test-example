@@ -78,9 +78,43 @@ const listDetail = async (ctx, next) => {
 	console.log('请传入歌单id');
 }
 
+/**
+ * @description 删除单个歌曲
+ * @return null
+ * @params {Number} sid 歌曲id
+ * @params {Number} pid 歌单id
+ */
+const removeSong = async (ctx, next) => {
+	const _query = ctx.request.query;
+	const _id = _query.sid;
+	if(_id) {
+		await SongModel.removeOne({id: _id});
+		return ctx.redirect(ctx.request.header.referer);
+	}
+	console.log('删除失败');
+}
+/**
+ * @description 删除多条歌单
+ * @return 列表页面
+ * @params {String} ids 多条歌单id，以逗号隔开
+ * @params {Number} pid 歌单id
+ */
+const removeSongMulti = async (ctx, next) => {
+	const _query = ctx.request.query;
+	let _ids = _query.ids;
+	if(_ids) {
+		_ids = _ids.split(',');
+		await SongModel.removeMulti('id', _ids);  
+		return ctx.redirect(ctx.request.header.referer);
+	}
+	console.log('删除失败');
+}
+
 export default {
 	list,
 	remove,
 	removeMulti,
-	listDetail
+	listDetail,
+	removeSong,
+	removeSongMulti
 }

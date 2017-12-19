@@ -9,7 +9,8 @@ block content
 				strong 作者：#{data.author}
 				p
 					span.layui-btn.layui-btn-normal.layui-btn-small#updateDetailList 更新歌曲列表
-					a.layui-btn.layui-btn-danger.layui-btn-small("/admin/list/remove?id=" + data.id) 删除
+					a.layui-btn.layui-btn-danger.layui-btn-small(href="/admin/list/remove?id=" + data.id) 删除歌单
+					span.layui-btn.layui-btn-danger.layui-btn-small#btnRemoveSong 删除所选歌曲
 			.page-ld-list
 				.page-ld-list-c
 					table.layui-table(lay-skin="nob")
@@ -23,7 +24,7 @@ block content
 							col(width="25%")
 						thead
 							th 
-								input(type="checkbox")
+								input#btnCheckAll(type="checkbox")
 							th 序号
 							th 歌名
 							th 时长
@@ -34,7 +35,7 @@ block content
 							each item, key in list
 								tr
 									td
-										input(type="checkbox")
+										input.song-item(type="checkbox", value=item.id)
 									td=key+1
 									td=item.title
 									td=item.length
@@ -42,6 +43,6 @@ block content
 									td=item.playlist
 									td
 										span.layui-btn.layui-btn-primary.layui-btn-small 查看
-										a.layui-btn.layui-btn-danger.layui-btn-small("/admin/list/remove?id=" + item.id) 删除
+										a.layui-btn.layui-btn-danger.layui-btn-small(href="/admin/song/remove?sid="+item.id) 删除
 	script(type="text/javascript", src="/frontend/scripts/utils/utils.js")
 	script(type="text/javascript", src="/frontend/scripts/admin.playdetail.js")

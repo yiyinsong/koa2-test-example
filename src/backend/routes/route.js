@@ -60,6 +60,18 @@ router.get('/admin/list/removemulti', AdminMusicController.removeMulti);
  * @params {Number} id 歌单id
  */
 router.get('/admin/list/detail', AdminMusicController.listDetail);
+/**
+ * @url admin/song/remove
+ * @params {Number} sid 歌曲id
+ * @params {Number} pid 歌单id
+ */
+router.get('/admin/song/remove', AdminMusicController.removeSong);
+/**
+ * @url admin/song/removemulti
+ * @params {Number} ids 多个歌单id，以逗号隔开 如：1,2,3,4,5...
+ * @params {Number} pid 歌单id
+ */
+router.get('/admin/song/removemulti', AdminMusicController.removeSongMulti);
 
 //api 图片上传
 router.post('/api/upload', UtilsApi.upload);

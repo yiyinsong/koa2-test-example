@@ -32,4 +32,52 @@ layui.use('layer', function () {
 		);
 
 	});
+	/*
+	* @description 全选&取消全选
+	*/
+	$('#btnCheckAll').on('click', e => {
+		$('.song-item').prop('checked', e.currentTarget.checked);
+	});
+	/*
+	* @description 单选
+	*/
+	$('.song-item').on('click', e => {
+		let _c = e.currentTarget.checked;
+		if(!_c) {
+			$('#btnCheckAll').prop('checked', false);
+		} else {
+			let _isCheckAll = true;
+			$('.song-item').each((k, v) => {
+				if(!$(v).prop('checked')) {
+					_isCheckAll = false;
+				}
+			});
+			if(_isCheckAll) {
+				$('#btnCheckAll').prop('checked', true);
+			}
+		}
+	});
+	/*
+	* @description 删除所选歌单
+	*/
+	$('#btnRemoveSong').on('click', e => {
+		let _hasCheck = false;
+		let _ids = '';
+		$('.song-item').each((k, v) => {
+			if($(v).prop('checked')) {
+				_hasCheck = true;
+				_ids += ',' + v.value;
+			}
+		});
+		if(!_hasCheck) {
+			return layer.alert('请选择要删除的歌单');
+		}
+		const _layerConfirm = layer.confirm('是否删除所选歌单？', {
+			btn: ['确定', '取消']
+		}, function() {
+			layer.close(_layerConfirm);
+			_ids = _ids.substr(1);
+			window.location.href = `/admin/song/removeMulti?ids=${_ids}`;
+		});
+	});
 });
