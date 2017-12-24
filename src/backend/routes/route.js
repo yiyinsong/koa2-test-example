@@ -32,6 +32,8 @@ router.get('/logout', SignController.logoutHandle);
 
 // 后台管理
 router.get('/admin', SignController.isLogged, AdminIndexController.index);
+// 后台管理面板
+router.get('/admin/main', SignController.isLogged, AdminIndexController.main);
 router.get('/admin/list', SignController.isLogged, AdminMusicController.list);
 /**
  * @url api/admin/listupdate
@@ -75,5 +77,18 @@ router.get('/admin/song/removemulti', AdminMusicController.removeSongMulti);
 
 //api 图片上传
 router.post('/api/upload', UtilsApi.upload);
+//自建歌单列表
+router.get('/admin/diylist', SignController.isLogged, AdminMusicController.diyList);
+//新建自建歌单
+router.get('/admin/diylist/add', SignController.isLogged, AdminMusicController.diyListAdd); 
+/**
+ * @url admin/diylist/addaction
+ * @params {Object} data
+ * @paramsAttribute data.img 封面图片
+ * @paramsAttribute data.title 歌单名称
+ * @paramsAttribute data.author 歌单作者
+ * @paramsAttribute data.desc 歌单描述
+ */
+ router.post('/admin/diylist/addaction', SignController.isLogged, AdminMusicController.diyListAddAction);
 
 export default router;

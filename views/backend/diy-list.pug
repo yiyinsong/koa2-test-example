@@ -1,0 +1,47 @@
+extends ./includes/header.pug
+block content
+	.container
+		.diy-list-header
+			.layui-row
+				.layui-col-xs8
+					form.layui-form.layui-inline
+						.layui-form-item
+							.layui-inline
+								label.layui-form-label 歌单名称
+								.layui-input-inline
+									input.layui-input(type="text", name="pl['name']")
+								button.layui-btn(type="submit") 搜索
+				.layui-col-xs4.diy-list-btns
+					a.layui-btn.layui-btn-normal(href="/admin/diylist/add") 新建歌单
+					a.layui-btn.layui-btn-danger 删除所选歌单
+		table.layui-table(lay-skin="line")
+				colgroup
+					col(width="5%")
+					col(width="10%")
+					col(width="15%")
+					col(width="10%")
+					col(width="15%")
+					col(width="15%")
+					col(width="30%")
+				thead
+					th
+						input.page-list-checkall#btnCheckAll(type="checkbox")
+					th 封面
+					th 标题
+					th 描述
+					th 作者
+					th 操作
+				tbody
+					each item in data
+						tr
+							td
+								input.page-list-checkitem(type="checkbox", value=item.id)
+							td
+								img(src=item.img)
+							td=item.title
+							td=item.desc
+							td=item.author
+							td
+								a.layui-btn.layui-btn-primary.layui-btn-sm(href="/admin/list/detail?id=" + item.id+'&oid=' + item._id) 查看
+								a.layui-btn.layui-btn-danger.layui-btn-sm(href="/admin/list/remove?id=" + item.id) 删除
+		include ./includes/paging.pug

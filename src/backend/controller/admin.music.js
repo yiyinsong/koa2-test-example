@@ -1,5 +1,7 @@
 import PlaylistModel from '../models/playlist';
+import DiylistModel from '../models/diylist';
 import SongModel from '../models/song';
+import ModelSequence from '../models/sequence';
 /**
  * @description 渲染后台列表页面
  * @return null
@@ -110,11 +112,80 @@ const removeSongMulti = async (ctx, next) => {
 	console.log('删除失败');
 }
 
+/**
+ * @description 自建歌单列表
+ * @return null
+ */
+ const diyList = async (ctx, next) => {
+ 	const _query = ctx.request.query;
+	let _page = _query.page && Number(_query.page);
+	let _limit = _query.limit && Number(_query.limit);
+	_limit = _limit || 20;
+	_page = _page || 1;
+ 	try {
+ 		let r = await DiylistModel.find().skip((_page - 1) * _limit).limit(_limit);
+		let count = await DiylistModel.count();
+		r = r || []; 
+		await ctx.render('./backend/diy-list', {
+			title: '自建歌单',
+			data: r,
+			limit: _limit || 20,
+			page: _page,
+			total: Math.ceil(count / _limit)
+		});
+ 	} catch(err) {
+ 		console.log(err);
+ 	}
+ }
+/**
+* @description 新建自建歌单
+*/
+ const diyListAdd = async (ctx, next) => {
+ 	await ctx.render('./backend/diy-list-add', {
+ 		title: '新建歌单'
+ 	});
+ }
+ /**
+* @description 添加歌单处理
+* @params {Object} data
+* @paramsAttribute data.img 封面图片
+* @paramsAttribute data.title 歌单名称
+* @paramsAttribute data.author 歌单作者
+* @paramsAttribute data.desc 歌单描述
+* @return 自建歌单列表
+*/
+const diyListAddAction = async (ctx, next) => {
+	const data = ctx.request.body.data;
+	if(!data) {
+		return ctx.body = '参数错误';
+	} else if(!data.img || data.img == '') {
+		return ctx.body = '请传入歌单封面'
+	} else if(!data.title || data.title == '') {
+		return ctx.body = '请传入歌单名称'
+	} else if(!data.author || data.author == '') {
+		return ctx.body = '请传入歌单作者'
+	} else if(!data.desc || data.desc == '') {
+		return ctx.body = '请传入歌单描述'
+	}
+	try {
+		const _id = await  ModelSequence.getSequence('diylistid');
+		data.id = _id;
+		const modelDiyList = new DiylistModel(data);
+		const r = await modelDiyList.save();
+		await ctx.redirect('/admin/diylist');
+	} catch(err) {
+		console.log(err);
+	}
+}
+
 export default {
 	list,
 	remove,
 	removeMulti,
 	listDetail,
 	removeSong,
-	removeSongMulti
+	removeSongMulti,
+	diyList,
+	diyListAdd,
+	diyListAddAction
 }

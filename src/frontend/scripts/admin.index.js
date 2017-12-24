@@ -17,7 +17,7 @@ layui.use('layer', function () {
 	*/
 	$('.admin-left li').on('click', e => {
 		const $t = $(e.currentTarget);
-		$t.addClass('active');
+		$t.addClass('active').siblings().removeClass('active');
 		$iframe.attr('src', windowUrl + $t.data('url'));
 	});
 });

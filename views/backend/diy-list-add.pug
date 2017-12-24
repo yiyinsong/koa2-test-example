@@ -1,0 +1,29 @@
+extends ./includes/header.pug
+block content
+	.container
+		form.layui-form.diy-list-add(method="post", action="/admin/diylist/addaction") 
+			.layui-form-item
+				label.layui-form-label 封面
+				.layui-input-block
+					.diy-list-upload
+						img(src="", id="uploadImgThumb")
+						input(type="file", name="imgs", id="uploadInput")
+						input(type="hidden", name="data[img]", id="uploadImgSrc")
+						p +
+			.layui-form-item
+				label.layui-form-label 歌单名称
+				.layui-input-block
+					input.layui-input(type="text",name="data[title]" placeholder="请输入歌单名称" id="plName")
+			.layui-form-item
+				label.layui-form-label 作者
+				.layui-input-block
+					input.layui-input(text="text",name="data[author]" placeholder="请输入作者" id="plAuthor")
+			.layui-form-item
+				label.layui-form-label 描述
+				.layui-input-block
+					textarea.layui-textarea(name="data[desc]", placeholder="请输入描述" id="plDesc")
+			.layui-form-item
+				.layui-input-block
+					span#submit.layui-btn 提交
+					a.layui-btn.layui-btn-primary(href="javascript: history.go(-1);") 取消
+	script(type="text/javascript", src="/frontend/scripts/admin.diylistadd.js")

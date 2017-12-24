@@ -1,1 +1,1 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default={uploadPath:"./public/uploads/",uploadLocalPath:"./uploads/",passwordSaltRounds:10};
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default={uploadPath:"./public/uploads/",uploadLocalPath:"/uploads/",passwordSaltRounds:10};

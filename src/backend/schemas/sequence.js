@@ -26,10 +26,10 @@ SequenceSchema.statics = {
 	 * @return {Number} 增长后的序列
 	 */
      async getSequence(sequenceName) {
-        const r = await  this.findOneAndUpdate(
+        const r = await this.findOneAndUpdate(
             {_id: sequenceName },
             {$inc:{sequence_value: 1}},
-            {new: true}
+            {upsert: true,new: true}
         ).exec();
         return r.sequence_value;
     }

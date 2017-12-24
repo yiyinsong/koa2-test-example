@@ -19,7 +19,10 @@ const PlayListSchema = new Schema({
 	},
 	img: String,
 	title: String,
-	playNum: String,
+	playNum: {
+		type: String,
+		default: 0
+	},
 	author: String,
 	desc: String,
 	meta: {
