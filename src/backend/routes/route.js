@@ -90,5 +90,15 @@ router.get('/admin/diylist/add', SignController.isLogged, AdminMusicController.d
  * @paramsAttribute data.desc 歌单描述
  */
  router.post('/admin/diylist/addaction', SignController.isLogged, AdminMusicController.diyListAddAction);
-
+ /**
+ * @url admin/diylist/remove
+ * @params {Number} id 歌单id
+ */
+router.get('/admin/diylist/remove', AdminMusicController.diyRemove);
+/**
+ * @url admin/diylist/removemulti
+ * @params {Number} ids 多个歌单id，以逗号隔开 如：1,2,3,4,5...
+ */
+router.get('/admin/diylist/removemulti', AdminMusicController.diyRemoveMulti);
+ 
 export default router;

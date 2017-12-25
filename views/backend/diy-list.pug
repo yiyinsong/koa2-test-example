@@ -4,16 +4,16 @@ block content
 		.diy-list-header
 			.layui-row
 				.layui-col-xs8
-					form.layui-form.layui-inline
+					form.layui-form.layui-inline(method='get', action='/admin/diylist')
 						.layui-form-item
 							.layui-inline
 								label.layui-form-label 歌单名称
 								.layui-input-inline
-									input.layui-input(type="text", name="pl['name']")
+									input.layui-input(type="text", name="title", value=init.keyword)
 								button.layui-btn(type="submit") 搜索
 				.layui-col-xs4.diy-list-btns
 					a.layui-btn.layui-btn-normal(href="/admin/diylist/add") 新建歌单
-					a.layui-btn.layui-btn-danger 删除所选歌单
+					a.layui-btn.layui-btn-danger#btnRemove 删除所选歌单
 		table.layui-table(lay-skin="line")
 				colgroup
 					col(width="5%")
@@ -43,5 +43,6 @@ block content
 							td=item.author
 							td
 								a.layui-btn.layui-btn-primary.layui-btn-sm(href="/admin/list/detail?id=" + item.id+'&oid=' + item._id) 查看
-								a.layui-btn.layui-btn-danger.layui-btn-sm(href="/admin/list/remove?id=" + item.id) 删除
+								a.layui-btn.layui-btn-danger.layui-btn-sm(href="/admin/diylist/remove?id=" + item.id) 删除
 		include ./includes/paging.pug
+	script(type="text/javascript", src="/frontend/scripts/admin.diylist.js")

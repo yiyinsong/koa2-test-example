@@ -45,7 +45,7 @@ const remove = async (ctx, next) => {
 	console.log('删除失败');
 }
 /**
- * @description 删除多条歌单
+ * @description 删除多个歌单
  * @return 列表页面
  * @params {String} ids 多条歌单id，以逗号隔开
  */
@@ -122,8 +122,9 @@ const removeSongMulti = async (ctx, next) => {
 	let _limit = _query.limit && Number(_query.limit);
 	_limit = _limit || 20;
 	_page = _page || 1;
+	let _data = ctx.request.query; 
  	try {
- 		let r = await DiylistModel.find().skip((_page - 1) * _limit).limit(_limit);
+ 		let r = await DiylistModel.find({title: new RegExp(_data.title)}).sort({'meta.updateTime': -1}).skip((_page - 1) * _limit).limit(_limit);
 		let count = await DiylistModel.count();
 		r = r || []; 
 		await ctx.render('./backend/diy-list', {
@@ -131,7 +132,10 @@ const removeSongMulti = async (ctx, next) => {
 			data: r,
 			limit: _limit || 20,
 			page: _page,
-			total: Math.ceil(count / _limit)
+			total: Math.ceil(count / _limit),
+			init: {
+				keyword: _data.title || ''
+			}
 		});
  	} catch(err) {
  		console.log(err);
@@ -178,6 +182,36 @@ const diyListAddAction = async (ctx, next) => {
 	}
 }
 
+/**
+ * @description 删除单个自建歌单
+ * @return 列表页面
+ * @params {Number} id 歌单id
+ */
+const diyRemove = async (ctx, next) => {
+	const _query = ctx.request.query;
+	const _id = _query.id;
+	if(_id) {
+		await DiylistModel.removeOne({id: _id});
+		return ctx.redirect('/admin/diylist');
+	}
+	console.log('删除失败');
+}
+/**
+ * @description 删除多个自建歌单
+ * @return 列表页面
+ * @params {String} ids 多条歌单id，以逗号隔开
+ */
+const diyRemoveMulti = async (ctx, next) => {
+	const _query = ctx.request.query;
+	let _ids = _query.ids;
+	if(_ids) {
+		_ids = _ids.split(',');
+		await DiylistModel.removeMulti('id', _ids);  
+		return ctx.redirect('/admin/diylist');
+	}
+	console.log('删除失败');
+}
+
 export default {
 	list,
 	remove,
@@ -187,5 +221,7 @@ export default {
 	removeSongMulti,
 	diyList,
 	diyListAdd,
-	diyListAddAction
+	diyListAddAction,
+	diyRemove,
+	diyRemoveMulti
 }

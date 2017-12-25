@@ -1,39 +1,40 @@
-.paging
-	.paging-container
-		a(href="/admin/list?limit="+limit+"&page=1") 首页
-		a(href="/admin/list?limit="+limit+"&page="+(page == 1 ? 1 : page - 1)) 上一页
-		if(total < 8)
-			- for (var i=1; i<=total; i++)
-				if(i == page)
-					a.active(href="/admin/list?limit="+limit+"&page="+i)=i
-				else
-					a(href="/admin/list?limit="+limit+"&page="+i)=i
-		else
-			if(page < 6)
-				- for (var i = 1; i<8; i++)
-					if(page == i)
-						a.active(href="/admin/list?limit="+limit+"&page=" + i)=i
+if total > 0
+	.paging
+		.paging-container
+			a(href="/admin/list?limit="+limit+"&page=1") 首页
+			a(href="/admin/list?limit="+limit+"&page="+(page == 1 ? 1 : page - 1)) 上一页
+			if(total < 8)
+				- for (var i=1; i<=total; i++)
+					if(i == page)
+						a.active(href="/admin/list?limit="+limit+"&page="+i)=i
 					else
-						a(href="/admin/list?limit="+limit+"&page=" + i)=i
-				a(href="#") ...
-			else if(page + 3 > total)
-				a(href="/admin/list?limit="+limit+"&page=1") 1
-				a(href="/admin/list?limit="+limit+"&page=2") 2
-				a(href="#") ...
-				- for (var i = total-5; i<=total; i++)
-					if(page == i)
-						a.active(href="/admin/list?limit="+limit+"&page=" + i)=i
-					else
-						a(href="/admin/list?limit="+limit+"&page=" + i)=i
+						a(href="/admin/list?limit="+limit+"&page="+i)=i
 			else
-				a(href="/admin/list?limit="+limit+"&page=1") 1
-				a(href="/admin/list?limit="+limit+"&page=2") 2
-				a(href="#") ...
-				a(href="/admin/list?limit="+limit+"&page="+(page-2))=page-2
-				a(href="/admin/list?limit="+limit+"&page="+(page-1))=page-1
-				a.active(href="/admin/list?limit="+limit+"&page="+page)=page
-				a(href="/admin/list?limit="+limit+"&page="+(page+1))=page+1
-				a(href="/admin/list?limit="+limit+"&page="+(page+2))=page+2
-				a(href="#") ...
-		a(href="/admin/list?limit="+limit+"&page="+(page == total ? total : page + 1)) 下一页 
-		a(href="/admin/list?limit="+limit+"&page="+total) 尾页
+				if(page < 6)
+					- for (var i = 1; i<8; i++)
+						if(page == i)
+							a.active(href="/admin/list?limit="+limit+"&page=" + i)=i
+						else
+							a(href="/admin/list?limit="+limit+"&page=" + i)=i
+					a(href="#") ...
+				else if(page + 3 > total)
+					a(href="/admin/list?limit="+limit+"&page=1") 1
+					a(href="/admin/list?limit="+limit+"&page=2") 2
+					a(href="#") ...
+					- for (var i = total-5; i<=total; i++)
+						if(page == i)
+							a.active(href="/admin/list?limit="+limit+"&page=" + i)=i
+						else
+							a(href="/admin/list?limit="+limit+"&page=" + i)=i
+				else
+					a(href="/admin/list?limit="+limit+"&page=1") 1
+					a(href="/admin/list?limit="+limit+"&page=2") 2
+					a(href="#") ...
+					a(href="/admin/list?limit="+limit+"&page="+(page-2))=page-2
+					a(href="/admin/list?limit="+limit+"&page="+(page-1))=page-1
+					a.active(href="/admin/list?limit="+limit+"&page="+page)=page
+					a(href="/admin/list?limit="+limit+"&page="+(page+1))=page+1
+					a(href="/admin/list?limit="+limit+"&page="+(page+2))=page+2
+					a(href="#") ...
+			a(href="/admin/list?limit="+limit+"&page="+(page == total ? total : page + 1)) 下一页 
+			a(href="/admin/list?limit="+limit+"&page="+total) 尾页
